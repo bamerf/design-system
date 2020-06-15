@@ -1,19 +1,24 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { GlobalStyle } from "./utils";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle, defaultTheme, darkTheme } from "./utils";
 import {
 	PrimaryButton,
 	SecondaryButton,
 	TertiaryButton,
 } from "./components/Buttons";
 
-const App = () => (
-	<div>
-		<PrimaryButton>Primary</PrimaryButton>
-		<SecondaryButton>Secondary</SecondaryButton>
-		<TertiaryButton>Tertiary</TertiaryButton>
-		<GlobalStyle />
-	</div>
-);
+const App = () => {
+	const useDarkTheme = false;
+
+	return (
+		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
+			<PrimaryButton>Primary</PrimaryButton>
+			<SecondaryButton>Secondary</SecondaryButton>
+			<TertiaryButton>Tertiary</TertiaryButton>
+			<GlobalStyle />
+		</ThemeProvider>
+	);
+};
 
 ReactDom.render(<App />, document.querySelector("#root"));
