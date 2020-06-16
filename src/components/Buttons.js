@@ -27,7 +27,11 @@ const BUTTON_MODIFIERS = {
 
     &:active {
       background-color: ${theme.status.successColorActive};
-    }
+		}
+		
+		&:disabled {
+			background-color: ${theme.disabled};
+		}
   `,
 	warning: ({ theme }) => `
   background-color: ${theme.status.warningColor};
@@ -44,7 +48,11 @@ const BUTTON_MODIFIERS = {
 
   &:active {
     background-color: ${theme.status.warningColorActive};
-  }
+	}
+	
+	&:disabled {
+		background-color: ${theme.disabled};
+	}
   `,
 	error: ({ theme }) => `
   background-color: ${theme.status.errorColor};
@@ -60,13 +68,16 @@ const BUTTON_MODIFIERS = {
   }
 
   &:active {
-    background-color: ${theme.status.errorColorActive};
+		background-color: ${theme.status.errorColorActive};
+	}
+
+	&:disabled {
+		background-color: ${theme.disabled};
+	}
   `,
-	icon: () => ``,
-	iconLabelled: () => ``,
 };
 
-const Button = styled.button`
+const defaultStyles = styled.button`
 	font-family: "Lato", monospace;
 	font-size: ${typeScale.paragraph};
 	padding: 8px 32px;
@@ -92,7 +103,7 @@ const Button = styled.button`
 	}
 `;
 
-export const PrimaryButton = styled(Button)`
+const primary = styled(defaultStyles)`
 	background-color: ${({ theme }) => theme.color};
 	border: none;
 	color: white;
@@ -100,7 +111,7 @@ export const PrimaryButton = styled(Button)`
 	${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
-export const SecondaryButton = styled(Button)`
+const secondary = styled(defaultStyles)`
 	background-color: ${neutral[100]};
 	color: ${({ theme }) => theme.color};
 	border: 2px solid ${({ theme }) => theme.color};
@@ -119,7 +130,7 @@ export const SecondaryButton = styled(Button)`
 	${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
-export const TertiaryButton = styled(Button)`
+const tertiary = styled(defaultStyles)`
 	background: none;
 	color: ${({ theme }) => theme.color};
 	border: none;
@@ -136,3 +147,7 @@ export const TertiaryButton = styled(Button)`
 
 	${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
+
+export default function Button({ variant = "primary", className, ...rest }) {
+	return primary;
+}
