@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { neutral } from "../utils";
@@ -6,11 +7,21 @@ import { typeScale } from "../utils";
 const BUTTON_MODIFIERS = {
 	small: () => `
     font-size: ${typeScale.helper};
-    padding: 4px 16px;
+		padding: 4px 16px;
+		
+		& > svg {
+			width: 16px;
+			height: 16px;
+		}
   `,
 	large: () => `
     font-size: ${typeScale.h5};
-    padding: 12px 32px;
+		padding: 12px 32px;
+		
+		& > svg {
+			width: 24px;
+			height: 24px;
+		}
   `,
 	success: ({ theme }) => `
     background-color: ${theme.status.successColor};
@@ -86,6 +97,9 @@ const defaultStyles = styled.button`
 	cursor: pointer;
 	user-select: none;
 	transition: background-color 100ms linear, color 100ms linear;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	&:focus {
 		outline: 2px solid ${({ theme }) => theme.focusOutline};
@@ -103,7 +117,7 @@ const defaultStyles = styled.button`
 	}
 `;
 
-const primary = styled(defaultStyles)`
+const Primary = styled(defaultStyles)`
 	background-color: ${({ theme }) => theme.color};
 	border: none;
 	color: white;
@@ -111,7 +125,7 @@ const primary = styled(defaultStyles)`
 	${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
-const secondary = styled(defaultStyles)`
+const Secondary = styled(defaultStyles)`
 	background-color: ${neutral[100]};
 	color: ${({ theme }) => theme.color};
 	border: 2px solid ${({ theme }) => theme.color};
@@ -130,7 +144,7 @@ const secondary = styled(defaultStyles)`
 	${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
-const tertiary = styled(defaultStyles)`
+const Tertiary = styled(defaultStyles)`
 	background: none;
 	color: ${({ theme }) => theme.color};
 	border: none;
@@ -148,6 +162,55 @@ const tertiary = styled(defaultStyles)`
 	${applyStyleModifiers(BUTTON_MODIFIERS)}
 `;
 
-export default function Button({ variant = "primary", className, ...rest }) {
-	return primary;
+const IconButton = styled(defaultStyles)`
+	background-color: ${({ theme }) => theme.color};
+	padding: 6px 8px;
+	border: none;
+	color: white;
+
+	${applyStyleModifiers(BUTTON_MODIFIERS)}
+`;
+
+const LabelledIconButton = styled(defaultStyles)`
+	background-color: ${({ theme }) => theme.color};
+	padding: 8px 0px;
+	padding-left: 18px;
+	padding-right: 24px;
+	border: none;
+	color: white;
+
+	& > svg {
+		width: 18px;
+		height: 18px;
+		margin-right: 6px;
+	}
+
+	${applyStyleModifiers(BUTTON_MODIFIERS)}
+`;
+
+export default function Button({
+	type = "primary",
+	className,
+	children,
+	disabled,
+	size = "",
+	status = "",
+}) {
+	let ButtonType = null;
+
+	if (type === "primary") ButtonType = Primary;
+	if (type === "secondary") ButtonType = Secondary;
+	if (type === "tertiary") ButtonType = Tertiary;
+	if (type === "icon") ButtonType = IconButton;
+	if (type === "labelledIcon") ButtonType = LabelledIconButton;
+
+	return (
+		<ButtonType
+			className={className}
+			disabled={disabled}
+			modifiers={[size, status]}
+		>
+			{children}
+		</ButtonType>
+	);
 }
