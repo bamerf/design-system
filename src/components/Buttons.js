@@ -19,8 +19,8 @@ const BUTTON_MODIFIERS = {
 		padding: 12px 32px;
 		
 		& > svg {
-			width: 24px;
-			height: 24px;
+			width: 36px;
+			height: 36px;
 		}
   `,
 	success: ({ theme }) => `
