@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, defaultTheme, darkTheme } from "./utils";
-import Button from "./components/Buttons";
+import Button from "./components/Buttons/Buttons";
 // import { ReactComponent as DeleteIcon } from "./svg/delete-white-36dp.svg";
 
 const App = () => {

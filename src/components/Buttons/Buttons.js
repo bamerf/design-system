@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
-import { neutral } from "../utils";
-import { typeScale } from "../utils";
+import { neutral } from "../../utils";
+import { typeScale } from "../../utils";
 
 const BUTTON_MODIFIERS = {
 	small: () => `
@@ -195,6 +195,7 @@ export default function Button({
 	disabled,
 	size = "",
 	status = "",
+	onClick,
 }) {
 	let ButtonType = null;
 
