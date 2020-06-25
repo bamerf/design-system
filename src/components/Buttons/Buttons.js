@@ -19,8 +19,8 @@ const BUTTON_MODIFIERS = {
 		padding: 12px 32px;
 		
 		& > svg {
-			width: 36px;
-			height: 36px;
+			width: 24px;
+			height: 24px;
 		}
   `,
 	success: ({ theme }) => `
@@ -89,7 +89,6 @@ const BUTTON_MODIFIERS = {
 };
 
 const defaultStyles = styled.button`
-	font-family: "Lato", monospace;
 	font-size: ${typeScale.paragraph};
 	padding: 8px 32px;
 	border-radius: 2px;
@@ -115,6 +114,11 @@ const defaultStyles = styled.button`
 		color: ${({ theme }) => theme.textColorWhite};
 		cursor: not-allowed;
 	}
+
+	& > svg {
+		width: 24px;
+		height: 24px;
+	}
 `;
 
 const Primary = styled(defaultStyles)`
@@ -127,12 +131,14 @@ const Primary = styled(defaultStyles)`
 
 const Secondary = styled(defaultStyles)`
 	background-color: ${neutral[100]};
+	padding: 7px 31px;
 	color: ${({ theme }) => theme.color};
 	border: 2px solid ${({ theme }) => theme.color};
 
 	&:hover {
 		border: 2px solid ${({ theme }) => theme.hover};
-		background-color: ${neutral[200]};
+		background-color: ${neutral[100]};
+		color: ${({ theme }) => theme.hover};
 	}
 
 	&:disabled {
@@ -195,7 +201,6 @@ export default function Button({
 	disabled,
 	size = "",
 	status = "",
-	onClick,
 }) {
 	let ButtonType = null;
 

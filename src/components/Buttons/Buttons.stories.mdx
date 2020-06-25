@@ -2,6 +2,7 @@ import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import Button from "./Buttons";
+import { DeleteIcon } from "../../assets/svg/delete-white-36dp.js";
 
 <Meta title="Design System|Buttons" component={Button} />
 
@@ -9,35 +10,107 @@ import Button from "./Buttons";
 
 Buttons are used to trigger actions within an application.
 
-## Usage
-
-Buttons are used to trigger internal actions within your web applications.
-
 ## Primary Buttons
 
-Primary buttons are used as a call to action and indicate the most important action on a page.
+Primary buttons indicate the most important action on a page.
 
 <Preview withToolbar>
-	<Story name="primary">
-		<Button disabled={boolean("Disabled", false)}>Primary</Button>
+	<Story name="Primary">
+		<Button>Primary</Button>
 	</Story>
 </Preview>
 
 ## Secondary Buttons
 
-Primary buttons are used as a call to action and indicate the most important action on a page.
+Secondary buttons call for an action with less priority compared to Primary buttons.
 
 <Preview withToolbar>
-	<Story name="secondary">
-		<Button type="secondary" disabled={boolean("Disabled", false)}>Secondary</Button>
+	<Story name="Secondary">
+		<Button type="secondary">Secondary</Button>
 	</Story>
 </Preview>
 
 ## Tertiary Buttons
 
-Primary buttons are used as a call to action and indicate the most important action on a page.
+Tertiary buttons are used as opposites to Primary button. For example _Cancel_ against _Login_
+
 <Preview withToolbar>
-	<Story name="tertiary">
-		<Button type="tertiary" disabled={boolean("Disabled", false)}>Tertiary</Button>
+	<Story name="Tertiary">
+		<Button type="tertiary">Tertiary</Button>
+	</Story>
+</Preview>
+
+## Status Buttons
+
+Status buttons are used to indicate the outcome of an action.
+
+<Preview>
+	<Story name="Success">
+		<Button status="success">Success</Button>
+	</Story>
+	<Story name="Warning">
+		<Button status="warning">Warning</Button>
+	</Story>
+	<Story name="Error">
+		<Button status="error">Error</Button>
+	</Story>
+</Preview>
+
+## Sizes
+
+You can choose between different sizes by specifying the `size` prop.
+
+<Preview>
+	<Story name="Small">
+		<Button size="small">Button</Button>
+	</Story>
+	<Story name="Medium">
+		<Button>Button</Button>
+	</Story>
+	<Story name="Large">
+		<Button size="large">Button</Button>
+	</Story>
+</Preview>
+
+## Icon Buttons
+
+You can pass an Icon as children to the component. You need to include `type="icon"` for correct padding.
+
+<Preview>
+	<Story name="Icon Button">
+		<Button type="icon">{DeleteIcon}</Button>
+	</Story>
+	<Story name="Labelled Icon Small">
+		<Button type="labelledIcon" size="small">
+			{DeleteIcon} Small
+		</Button>
+	</Story>
+	<Story name="Labelled Icon">
+		<Button type="labelledIcon">{DeleteIcon} Labelled</Button>
+	</Story>
+	<Story name="Labelled Icon Large">
+		<Button type="labelledIcon" size="large">
+			{DeleteIcon} Large
+		</Button>
+	</Story>
+</Preview>
+
+## Disabled
+
+Default button states work on all button types and sizes.
+
+<Preview>
+	<Story name="Primary Disabled">
+		<Button disabled>Primary</Button>
+	</Story>
+	<Story name="Secondary Disabled">
+		<Button disabled type="secondary">
+			Secondary
+		</Button>
+	</Story>
+	<Story name="Icon Button Disabled">
+		<Button disabled type="icon">
+			{DeleteIcon}
+		</Button>
 	</Story>
 </Preview>
