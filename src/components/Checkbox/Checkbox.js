@@ -26,13 +26,30 @@ const StyledCheckbox = styled.div`
 	display: inline-block;
 	width: 18px;
 	height: 18px;
-	background: ${(props) => (props.checked ? "salmon" : "papayawhip")};
+	background-color: ${({ theme, checked }) =>
+		checked ? theme.color : theme.backgroundWhite};
 	border-radius: 2px;
-	border: 2px solid green;
-	transition: all 150ms;
+	border: 2px solid
+		${({ theme, checked }) => (checked ? theme.color : theme.selectDefault)};
+	transition: color 100ms linear, background-color 100ms linear,
+		border 100ms linear;
 
-	${HiddenCheckbox}:focus + & {
-		box-shadow: 0 0 0 3px pink;
+	&:hover {
+		border: 2px solid
+			${({ theme, checked }) => (checked ? theme.color : theme.hover)};
+	}
+
+	&:focus {
+		outline: 2px solid ${({ theme }) => theme.focusOutline};
+		outline-offset: 1px;
+	}
+
+	&:disabled {
+		background-color: ${({ theme, checked }) =>
+			checked ? theme.color : theme.selectDisabled};
+		border: 2px solid
+			${({ theme, checked }) => (checked ? theme.color : "pink")};
+		cursor: not-allowed;
 	}
 
 	${Icon} {
@@ -47,15 +64,16 @@ const CheckboxContainer = styled.div`
 
 export default function Checkbox({ className, ...props }) {
 	const [checked, setChecked] = useState(false);
+	const disabled = true;
 	return (
 		<CheckboxContainer
 			className={className}
 			onClick={() => setChecked(!checked)}
 		>
-			<HiddenCheckbox checked={checked} {...props} />
-			<StyledCheckbox checked={checked}>
+			<HiddenCheckbox checked={checked} {...props} disabled={disabled} />
+			<StyledCheckbox checked={checked} disabled={disabled}>
 				<Icon viewBox="0 0 24 24">
-					<polyline points="20 6 9 17 4 12" />
+					<polyline points="22 4 8 20 1 14" />
 				</Icon>
 			</StyledCheckbox>
 		</CheckboxContainer>

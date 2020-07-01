@@ -201,6 +201,7 @@ export default function Button({
 	disabled,
 	size = "",
 	status = "",
+	...props
 }) {
 	let ButtonType = null;
 
@@ -215,6 +216,7 @@ export default function Button({
 			className={className}
 			disabled={disabled}
 			modifiers={[size, status]}
+			{...props}
 		>
 			{children}
 		</ButtonType>
