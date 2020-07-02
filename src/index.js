@@ -8,7 +8,7 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
-			<Checkbox />
+			<Checkbox label="Check this" />
 			<GlobalStyle />
 		</ThemeProvider>
 	);
