@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
-import { typescale } from "../../utils";
+import { typeScale } from "../../utils";
 
 const CHECKBOX_MODIFIERS = {
 	large: () => `
-		width: 24px;
-		height: 24px;
+		> div {
+			width: 24px;
+			height: 24px;
+		}
+
+		> p {
+			font-size: ${typeScale.h5}
+		}
   `,
-	error: ({ theme }) => `
-  background-color: ${theme.status.errorColor};
-  color: ${theme.textColorWhite};
-
-  &:hover {
-    background-color: ${theme.status.errorColorHover};
-  }
-
-  &:focus {
-    outline: 2px solid ${theme.status.errorColorHover};
-    outline-offset: 2px;
-  }
-
-  &:active {
-		background-color: ${theme.status.errorColorActive};
+	error: ({ theme, checked }) => `
+	> div {
+		border-color: ${checked ? "blue" : theme.status.errorColor}
 	}
 
-	&:disabled {
-		background-color: ${theme.disabled};
+	> p {
+		color: ${checked ? theme.label : theme.status.errorColor}
+	}
+
+	&:hover {
+		> div {
+			border-color: ${theme.status.errorColorHover}
+		}
 	}
   `,
 };
@@ -35,6 +35,8 @@ const CheckboxContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+
+	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
 const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
@@ -108,28 +110,27 @@ export default function Checkbox({
 	label,
 	size = "",
 	status = "",
+	disabled,
 	...props
 }) {
 	const [checked, setChecked] = useState(false);
-	const disabled = false;
 	return (
-		<CheckboxContainer className={className}>
+		<CheckboxContainer
+			className={className}
+			modifiers={[size, status]}
+			disabled={disabled}
+		>
 			<HiddenCheckbox checked={checked} {...props} disabled={disabled} />
 			<StyledCheckbox
 				checked={checked}
 				disabled={disabled}
-				modifiers={[size, status]}
 				onClick={() => setChecked(!checked)}
 			>
 				<Icon viewBox="0 0 24 24">
 					<polyline points="22 4 8 20 1 14" />
 				</Icon>
 			</StyledCheckbox>
-			{label ? (
-				<Label disabled={disabled} modifiers={[size, status]}>
-					{label}
-				</Label>
-			) : null}
+			{label ? <Label disabled={disabled}>{label}</Label> : null}
 		</CheckboxContainer>
 	);
 }
