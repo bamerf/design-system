@@ -1,0 +1,56 @@
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
+import Checkbox from "./Checkbox";
+
+<Meta title="Design System|Checkbox" component={Checkbox} />
+
+# Checkbox
+
+Checkboxes are used when multiple optional or mandatory fields need to be selected.
+
+### Default Checkbox
+
+<Preview withToolbar>
+	<Story name="Default">
+		<Checkbox />
+	</Story>
+</Preview>
+
+### Labelled Checkbox
+
+<Preview withToolbar>
+	<Story name="Labelled">
+		<Checkbox label="Check This" />
+	</Story>
+</Preview>
+
+### Sizes
+
+<Preview withToolbar>
+	<Story name="Large">
+		<Checkbox label="Check This" size="large" />
+	</Story>
+</Preview>
+
+### Status
+
+<Preview withToolbar>
+	<Story name="Error Medium">
+		<Checkbox label="Check This" status="error" />
+	</Story>
+	<Story name="Error Large">
+		<Checkbox label="Check This" size="large" status="error" />
+	</Story>
+</Preview>
+
+### Disabled
+
+<Preview withToolbar>
+	<Story name="Disabled">
+		<Checkbox label="Check This" status="disabled" />
+	</Story>
+	<Story name="Disabled Checked">
+		<Checkbox label="Check This" status="disabled" isChecked />
+	</Story>
+</Preview>

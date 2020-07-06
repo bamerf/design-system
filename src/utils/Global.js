@@ -3,8 +3,9 @@ import { primaryFont } from "./typography";
 import { normalize } from "polished";
 
 export const GlobalStyle = createGlobalStyle`
-  ${normalize}
-  
+
+  ${normalize};
+
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -55,14 +56,14 @@ export const GlobalStyle = createGlobalStyle`
     border-spacing: 0;
   }
 
-    html {
-      font-size: 14px;
-      box-sizing: border-box;
-    }
+  html {
+    font-size: 14px;
+    box-sizing: border-box;
+  }
 
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 
   body {
     /* margin: 0; */

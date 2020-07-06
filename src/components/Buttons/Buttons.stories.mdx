@@ -2,7 +2,7 @@ import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import Button from "./Buttons";
-import { DeleteIcon } from "../../assets/svg/delete-white-36dp.js";
+import { Delete } from "../../assets/svg/icons.js";
 
 <Meta title="Design System|Buttons" component={Button} />
 
@@ -78,19 +78,19 @@ You can pass an icon as children to the component. You need to include `type="ic
 
 <Preview>
 	<Story name="Icon Button">
-		<Button type="icon">{DeleteIcon}</Button>
+		<Button type="icon">{Delete}</Button>
 	</Story>
 	<Story name="Labelled Icon Small">
 		<Button type="labelledIcon" size="small">
-			{DeleteIcon} Small
+			{Delete} Small
 		</Button>
 	</Story>
 	<Story name="Labelled Icon">
-		<Button type="labelledIcon">{DeleteIcon} Labelled</Button>
+		<Button type="labelledIcon">{Delete} Labelled</Button>
 	</Story>
 	<Story name="Labelled Icon Large">
 		<Button type="labelledIcon" size="large">
-			{DeleteIcon} Large
+			{Delete} Large
 		</Button>
 	</Story>
 </Preview>
@@ -110,7 +110,7 @@ Default button states work on all button types and sizes.
 	</Story>
 	<Story name="Icon Button Disabled">
 		<Button disabled type="icon">
-			{DeleteIcon}
+			{Delete}
 		</Button>
 	</Story>
 </Preview>

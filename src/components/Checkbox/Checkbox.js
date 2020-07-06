@@ -16,7 +16,7 @@ const CHECKBOX_MODIFIERS = {
   `,
 	error: ({ theme, checked }) => `
 	> div {
-		border-color: ${checked ? "blue" : theme.status.errorColor}
+		border-color: ${checked ? theme.color : theme.status.errorColor}
 	}
 
 	> p {
@@ -25,13 +25,30 @@ const CHECKBOX_MODIFIERS = {
 
 	&:hover {
 		> div {
-			border-color: ${theme.status.errorColorHover}
+			border-color: ${checked ? theme.color : theme.status.errorColorHover}
 		}
 	}
-  `,
+	`,
+	disabled: ({ theme, checked }) => `
+
+		cursor: not-allowed;
+
+		> div {
+			background-color: ${checked ? theme.selectDisabled : theme.disabledBackground};
+			border-color: ${checked ? theme.selectDisabled : theme.disabled};
+			cursor: not-allowed;
+			pointer-events:none;
+		}
+
+		> p {
+			color: ${theme.disabled};
+			cursor: not-allowed;
+		}
+	`,
 };
 
 const CheckboxContainer = styled.div`
+	max-width: max-content;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -111,26 +128,23 @@ export default function Checkbox({
 	size = "",
 	status = "",
 	disabled,
+	isChecked,
 	...props
 }) {
-	const [checked, setChecked] = useState(false);
+	const [checked, setChecked] = useState(false || isChecked);
 	return (
 		<CheckboxContainer
 			className={className}
 			modifiers={[size, status]}
-			disabled={disabled}
+			checked={checked}
 		>
-			<HiddenCheckbox checked={checked} {...props} disabled={disabled} />
-			<StyledCheckbox
-				checked={checked}
-				disabled={disabled}
-				onClick={() => setChecked(!checked)}
-			>
+			<HiddenCheckbox checked={checked} {...props} />
+			<StyledCheckbox checked={checked} onClick={() => setChecked(!checked)}>
 				<Icon viewBox="0 0 24 24">
 					<polyline points="22 4 8 20 1 14" />
 				</Icon>
 			</StyledCheckbox>
-			{label ? <Label disabled={disabled}>{label}</Label> : null}
+			{label ? <Label>{label}</Label> : null}
 		</CheckboxContainer>
 	);
 }

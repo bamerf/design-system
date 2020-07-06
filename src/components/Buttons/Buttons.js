@@ -109,6 +109,10 @@ const defaultStyles = styled.button`
 		background-color: ${({ theme }) => theme.hover};
 	}
 
+	&:active {
+		background-color: ${({ theme }) => theme.active};
+	}
+
 	&:disabled {
 		background-color: ${({ theme }) => theme.disabled};
 		color: ${({ theme }) => theme.textColorWhite};
@@ -141,6 +145,11 @@ const Secondary = styled(defaultStyles)`
 		color: ${({ theme }) => theme.hover};
 	}
 
+	&:active {
+		border-color: ${({ theme }) => theme.active};
+		color: ${({ theme }) => theme.active};
+	}
+
 	&:disabled {
 		border-color: ${({ theme }) => theme.disabled};
 		background: ${neutral[100]};
@@ -158,6 +167,10 @@ const Tertiary = styled(defaultStyles)`
 	&:hover {
 		color: ${({ theme }) => theme.hover};
 		background: none;
+	}
+
+	&:active {
+		color: ${({ theme }) => theme.active};
 	}
 
 	&:disabled {
