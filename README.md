@@ -2,4 +2,4 @@
 
 ## Built with `react`, `styled-component` and `storybook`
 
-[Visit Library Here](https://design-system-ten.vercel.app/)
+[Visit library Here](https://design-system-zeta.vercel.app/)
