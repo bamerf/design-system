@@ -10,7 +10,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Checkbox label="Check this" status="disabled" />
+			<Checkbox label="Check this" checked status="disabled" />
 		</ThemeProvider>
 	);
 };

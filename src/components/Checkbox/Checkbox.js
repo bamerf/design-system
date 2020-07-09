@@ -128,19 +128,21 @@ export default function Checkbox({
 	size = "",
 	status = "",
 	disabled,
-	isChecked,
+	checked,
 	...props
 }) {
-	const [checked, setChecked] = useState(false || isChecked);
-	console.log("testing deployment")
+	const [isChecked, setIsChecked] = useState(false || checked);
 	return (
 		<CheckboxContainer
 			className={className}
 			modifiers={[size, status]}
-			checked={checked}
+			checked={isChecked}
 		>
-			<HiddenCheckbox checked={checked} {...props} />
-			<StyledCheckbox checked={checked} onClick={() => setChecked(!checked)}>
+			<HiddenCheckbox checked={isChecked} {...props} />
+			<StyledCheckbox
+				checked={isChecked}
+				onClick={() => setIsChecked(!isChecked)}
+			>
 				<Icon viewBox="0 0 24 24">
 					<polyline points="22 4 8 20 1 14" />
 				</Icon>
