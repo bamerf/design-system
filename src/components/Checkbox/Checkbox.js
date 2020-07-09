@@ -132,6 +132,7 @@ export default function Checkbox({
 	...props
 }) {
 	const [checked, setChecked] = useState(false || isChecked);
+	console.log("testing deployment")
 	return (
 		<CheckboxContainer
 			className={className}
