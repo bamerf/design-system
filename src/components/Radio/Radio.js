@@ -69,18 +69,12 @@ const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
 	width: 1px;
 `;
 
-const Icon = styled.svg`
-	fill: none;
-	stroke: white;
-	stroke-width: 2px;
-`;
-
 const StyledCheckbox = styled.div`
 	width: 18px;
 	height: 18px;
 	background-color: ${({ theme, checked }) =>
 		checked ? theme.color : theme.backgroundWhite};
-	border-radius: 2px;
+	border-radius: 50%;
 	border: 2px solid
 		${({ theme, checked }) => (checked ? theme.color : theme.selectDefault)};
 	transition: color 100ms linear, background-color 100ms linear,
@@ -104,12 +98,10 @@ const StyledCheckbox = styled.div`
 		cursor: not-allowed;
 	}
 
-	${Icon} {
-		visibility: ${(props) => (props.checked ? "visible" : "hidden")};
-	}
-
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
+
+const Dot = styled.div``;
 
 const Label = styled.p`
 	width: max-content;
@@ -121,7 +113,7 @@ const Label = styled.p`
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
-export default function Checkbox({
+export default function Radio({
 	className,
 	label,
 	size = "",
@@ -141,11 +133,7 @@ export default function Checkbox({
 			<StyledCheckbox
 				checked={isChecked}
 				onClick={() => setIsChecked(!isChecked)}
-			>
-				<Icon viewBox="0 0 24 24">
-					<polyline points="22 4 8 20 1 14" />
-				</Icon>
-			</StyledCheckbox>
+			></StyledCheckbox>
 			{label ? <Label>{label}</Label> : null}
 		</CheckboxContainer>
 	);
