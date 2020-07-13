@@ -4,15 +4,21 @@ import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale } from "../../utils";
 
 const CHECKBOX_MODIFIERS = {
-	large: () => `
+	large: ({ theme, checked }) => `
 		> div {
 			width: 24px;
 			height: 24px;
+
+			:after {
+				width: 8px;
+				height: 8px;
+			}
 		}
 
 		> p {
 			font-size: ${typeScale.h5}
 		}
+
   `,
 	error: ({ theme, checked }) => `
 	> div {
@@ -38,6 +44,10 @@ const CHECKBOX_MODIFIERS = {
 			border-color: ${checked ? theme.selectDisabled : theme.disabled};
 			cursor: not-allowed;
 			pointer-events:none;
+
+			:after {
+				background-color: ${checked ? "white" : theme.disabledBackground};
+			}
 		}
 
 		> p {
@@ -70,6 +80,9 @@ const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
 `;
 
 const StyledCheckbox = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 18px;
 	height: 18px;
 	background-color: ${({ theme, checked }) =>
@@ -85,6 +98,11 @@ const StyledCheckbox = styled.div`
 			${({ theme, checked }) => (checked ? theme.color : theme.hover)};
 	}
 
+	&:active {
+		border: 2px solid
+			${({ theme, checked }) => (checked ? theme.color : theme.color)};
+	}
+
 	&:focus {
 		outline: 2px solid ${({ theme }) => theme.focusOutline};
 		outline-offset: 1px;
@@ -98,10 +116,18 @@ const StyledCheckbox = styled.div`
 		cursor: not-allowed;
 	}
 
+	&::after {
+		content: "";
+		width: 6px;
+		height: 6px;
+		-moz-border-radius: 7.5px;
+		-webkit-border-radius: 7.5px;
+		border-radius: 7.5px;
+		background-color: white;
+	}
+
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
-
-const Dot = styled.div``;
 
 const Label = styled.p`
 	width: max-content;
@@ -133,6 +159,7 @@ export default function Radio({
 			<StyledCheckbox
 				checked={isChecked}
 				onClick={() => setIsChecked(!isChecked)}
+				disabled={disabled}
 			></StyledCheckbox>
 			{label ? <Label>{label}</Label> : null}
 		</CheckboxContainer>

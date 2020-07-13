@@ -11,7 +11,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Radio checked />
+			<Radio label="Check this" checked />
 		</ThemeProvider>
 	);
 };

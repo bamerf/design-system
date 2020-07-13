@@ -96,6 +96,11 @@ const StyledCheckbox = styled.div`
 		outline-offset: 1px;
 	}
 
+	&:active {
+		border: 2px solid
+			${({ theme, checked }) => (checked ? theme.color : theme.color)};
+	}
+
 	&:disabled {
 		background-color: ${({ theme, checked }) =>
 			checked ? theme.color : theme.selectDisabled};
