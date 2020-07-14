@@ -57,7 +57,7 @@ const CHECKBOX_MODIFIERS = {
 	`,
 };
 
-const CheckboxContainer = styled.div`
+const Container = styled.div`
 	max-width: max-content;
 	display: flex;
 	flex-direction: row;
@@ -150,7 +150,7 @@ export default function Radio({
 }) {
 	const [isChecked, setIsChecked] = useState(false || checked);
 	return (
-		<CheckboxContainer
+		<Container
 			className={className}
 			modifiers={[size, status]}
 			checked={isChecked}
@@ -162,6 +162,6 @@ export default function Radio({
 				disabled={disabled}
 			></StyledCheckbox>
 			{label ? <Label>{label}</Label> : null}
-		</CheckboxContainer>
+		</Container>
 	);
 }

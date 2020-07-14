@@ -18,6 +18,8 @@ export const defaultTheme = {
 	labelDisabled: neutral[300],
 	textColorPlaceholder: neutral[300],
 	backgroundWhite: neutral[100],
+	sliderDefault: neutral[400],
+	sliderLabel: neutral[500],
 	primaryFont,
 	status: {
 		warningColor: warning[200],
