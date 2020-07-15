@@ -144,7 +144,6 @@ export default function Radio({
 	label,
 	size = "",
 	status = "",
-	disabled,
 	checked,
 	...props
 }) {
@@ -159,7 +158,6 @@ export default function Radio({
 			<StyledCheckbox
 				checked={isChecked}
 				onClick={() => setIsChecked(!isChecked)}
-				disabled={disabled}
 			></StyledCheckbox>
 			{label ? <Label>{label}</Label> : null}
 		</Container>

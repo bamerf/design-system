@@ -12,7 +12,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Slider min={20} max={80} value={50} />
+			<Slider min={20} max={80} value={20} size="large" />
 		</ThemeProvider>
 	);
 };
