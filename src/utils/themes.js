@@ -20,6 +20,7 @@ export const defaultTheme = {
 	backgroundWhite: neutral[100],
 	sliderDefault: neutral[400],
 	sliderLabel: neutral[500],
+	sliderDisabled: green[100],
 	primaryFont,
 	status: {
 		warningColor: warning[200],

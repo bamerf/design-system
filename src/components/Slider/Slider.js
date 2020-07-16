@@ -5,49 +5,43 @@ import { typeScale } from "../../utils";
 
 const CHECKBOX_MODIFIERS = {
 	large: ({ theme }) => `
-		> div {
-			width: 24px;
-			height: 24px;
-
-			:after {
-				width: 8px;
-				height: 8px;
-			}
-		}
-
-		> p {
-			font-size: ${typeScale.h5}
+		p {
+			font-size: ${typeScale.h5};
 		}
 
   `,
-	disabled: ({ theme, checked }) => `
+	disabled: ({ theme, min, value }) => `
 
 		cursor: not-allowed;
 
 		> div {
-			background-color: ${checked ? theme.selectDisabled : theme.disabledBackground};
-			border-color: ${checked ? theme.selectDisabled : theme.disabled};
 			cursor: not-allowed;
-			pointer-events:none;
+			pointer-events: none;
+		}
 
-			:after {
-				background-color: ${checked ? "white" : theme.disabledBackground};
+		input {
+			background-color: ${theme.labelDisabled};
+			&::-webkit-slider-thumb {
+				border: 3px solid ${value === min ? theme.disabled : theme.sliderDisabled};
+			background-color: ${theme.disabledBackground};
 			}
 		}
 
-		> p {
+		p {
 			color: ${theme.disabled};
 			cursor: not-allowed;
 		}
 	`,
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
+`;
 
 const SliderContainer = styled.div`
 	display: flex;
 	align-items: center;
-	position: relative;
+	/* position: relative; */
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
@@ -138,18 +132,18 @@ const RangeInput = styled.input.attrs(() => ({
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
-const RangeFill = styled.div`
-	position: absolute;
-	z-index: 0;
-	/* max-width: 250px; */
-	width: 49%;
-	height: 3px;
-	-webkit-appearance: none;
-	border-radius: 50px;
-	background-color: black;
-	outline: none;
-	transition: all 100ms linear;
-`;
+// const RangeFill = styled.div`
+// 	position: absolute;
+// 	z-index: 0;
+// 	/* max-width: 250px; */
+// 	width: 49%;
+// 	height: 3px;
+// 	-webkit-appearance: none;
+// 	border-radius: 50px;
+// 	background-color: black;
+// 	outline: none;
+// 	transition: all 100ms linear;
+// `;
 
 const Value = styled.p`
 	color: ${({ theme }) => theme.sliderDefault};
@@ -162,7 +156,7 @@ const Value = styled.p`
 const Label = styled.p`
 	color: ${({ theme }) => theme.sliderLabel};
 	margin-left: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 8px;
 	user-select: none;
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
@@ -175,11 +169,17 @@ export default function Slider({
 	value,
 	size = "",
 	status = "",
+	label,
 }) {
 	const [valueNum, setValueNum] = useState(value);
 	return (
-		<Container className={className}>
-			<Label>Slider</Label>
+		<Container
+			className={className}
+			modifiers={[size, status]}
+			min={min}
+			value={value}
+		>
+			<Label>{label}</Label>
 			<SliderContainer>
 				<RangeInput
 					min={Number(min)}
