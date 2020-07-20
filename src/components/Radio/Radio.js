@@ -3,8 +3,33 @@ import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale } from "../../utils";
 
+export default function Radio({
+	className,
+	label,
+	size = "",
+	status = "",
+	checked,
+	...props
+}) {
+	const [isChecked, setIsChecked] = useState(false || checked);
+	return (
+		<Container
+			className={className}
+			modifiers={[size, status]}
+			checked={isChecked}
+		>
+			<HiddenCheckbox checked={isChecked} {...props} />
+			<StyledCheckbox
+				checked={isChecked}
+				onClick={() => setIsChecked(!isChecked)}
+			></StyledCheckbox>
+			{label ? <Label>{label}</Label> : null}
+		</Container>
+	);
+}
+
 const CHECKBOX_MODIFIERS = {
-	large: ({ theme, checked }) => `
+	large: () => `
 		> div {
 			width: 24px;
 			height: 24px;
@@ -138,28 +163,3 @@ const Label = styled.p`
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
-
-export default function Radio({
-	className,
-	label,
-	size = "",
-	status = "",
-	checked,
-	...props
-}) {
-	const [isChecked, setIsChecked] = useState(false || checked);
-	return (
-		<Container
-			className={className}
-			modifiers={[size, status]}
-			checked={isChecked}
-		>
-			<HiddenCheckbox checked={isChecked} {...props} />
-			<StyledCheckbox
-				checked={isChecked}
-				onClick={() => setIsChecked(!isChecked)}
-			></StyledCheckbox>
-			{label ? <Label>{label}</Label> : null}
-		</Container>
-	);
-}
