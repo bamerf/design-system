@@ -7,10 +7,39 @@ import Switch from "./Switch";
 
 # Switch
 
+Switches are used for simplifying true and false choices.
+
 ### Default Switch
 
 <Preview withToolbar>
 	<Story name="Default">
 		<Switch />
+	</Story>
+</Preview>
+
+### Labelled
+
+<Preview withToolbar>
+	<Story name="Labelled">
+		<Switch label="Labelled Switch" />
+	</Story>
+</Preview>
+
+### Sizes
+
+<Preview withToolbar>
+	<Story name="Large">
+		<Switch label="Large Switch" size="large" />
+	</Story>
+</Preview>
+
+### Disabled
+
+<Preview withToolbar>
+	<Story name="Disabled">
+		<Switch label="Disabled" status="disabled" />
+	</Story>
+	<Story name="Disabled Checked">
+		<Switch label="Disabled Checked" status="disabled" checked />
 	</Story>
 </Preview>

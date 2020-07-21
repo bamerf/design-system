@@ -9,7 +9,7 @@ export default function Switch({
 	size = "",
 	status = "",
 	checked,
-	...props
+	disabled,
 }) {
 	const [isChecked, setIsChecked] = useState(false || checked);
 	return (
@@ -26,20 +26,32 @@ export default function Switch({
 }
 
 const CHECKBOX_MODIFIERS = {
-	disabled: ({ theme, checked }) => `
-
-		cursor: not-allowed;
-
-		> div {
-			background-color: ${checked ? theme.selectDisabled : theme.disabledBackground};
-			border-color: ${checked ? theme.selectDisabled : theme.disabled};
-			cursor: not-allowed;
-			pointer-events:none;
-
-			:after {
-				background-color: ${checked ? "white" : theme.disabledBackground};
-			}
+	large: () => `
+		> p {
+			font-size: ${typeScale.h5}
 		}
+  `,
+	disabled: ({ theme }) => `
+  
+    cursor: not-allowed;
+  
+		> label {
+      cursor: not-allowed;
+      pointer-events:none;
+      background: ${theme.disabled};
+      :after {
+        background: ${theme.disabledBackground};
+      }
+    }
+    
+    > input {
+      :checked + ${SwitchThumb} {
+        background: ${theme.sliderDisabled};
+      }
+
+      cursor: not-allowed;
+      pointer-events:none;
+    }
 
 		> p {
 			color: ${theme.disabled};
@@ -52,6 +64,9 @@ const Container = styled.div`
 	position: relative;
 	display: flex;
 	align-items: center;
+	width: max-content;
+
+	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
 const SwitchThumb = styled.label`
@@ -80,6 +95,7 @@ const StyledSwitch = styled.input`
 	border-radius: 15px;
 	width: 40px;
 	height: 24px;
+	cursor: pointer;
 	&:checked + ${SwitchThumb} {
 		background: ${({ theme }) => theme.color};
 		&::after {
@@ -100,6 +116,4 @@ const Label = styled.p`
 		disabled ? theme.labelDisabled : theme.label};
 	margin-left: 12px;
 	user-select: none;
-
-	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;

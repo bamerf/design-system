@@ -9,7 +9,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Switch label="Click me" />
+			<Switch label="Click me" size="large" />
 		</ThemeProvider>
 	);
 };
