@@ -51,7 +51,7 @@ const CHECKBOX_MODIFIERS = {
 	}
 
 	> p {
-		color: ${checked ? theme.label : theme.status.errorColor}
+		color: ${checked ? theme.defaultGrey : theme.status.errorColor}
 	}
 
 	&:hover {
@@ -65,8 +65,8 @@ const CHECKBOX_MODIFIERS = {
 		cursor: not-allowed;
 
 		> div {
-			background-color: ${checked ? theme.selectDisabled : theme.disabledBackground};
-			border-color: ${checked ? theme.selectDisabled : theme.disabled};
+			background-color: ${checked ? theme.colorDisabled : theme.disabledBackground};
+			border-color: ${checked ? theme.colorDisabled : theme.disabled};
 			cursor: not-allowed;
 			pointer-events:none;
 
@@ -114,7 +114,7 @@ const StyledCheckbox = styled.div`
 		checked ? theme.color : theme.backgroundWhite};
 	border-radius: 50%;
 	border: 2px solid
-		${({ theme, checked }) => (checked ? theme.color : theme.selectDefault)};
+		${({ theme, checked }) => (checked ? theme.color : theme.defaultGrey)};
 	transition: color 100ms linear, background-color 100ms linear,
 		border 100ms linear;
 
@@ -135,7 +135,7 @@ const StyledCheckbox = styled.div`
 
 	&:disabled {
 		background-color: ${({ theme, checked }) =>
-			checked ? theme.color : theme.selectDisabled};
+			checked ? theme.color : theme.colorDisabled};
 		border: 2px solid
 			${({ theme, checked }) => (checked ? theme.color : "pink")};
 		cursor: not-allowed;
@@ -157,7 +157,7 @@ const StyledCheckbox = styled.div`
 const Label = styled.p`
 	width: max-content;
 	color: ${({ theme, disabled }) =>
-		disabled ? theme.labelDisabled : theme.label};
+		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};
 	margin-left: 8px;
 	user-select: none;
 

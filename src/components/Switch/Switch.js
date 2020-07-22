@@ -46,7 +46,7 @@ const CHECKBOX_MODIFIERS = {
     
     > input {
       :checked + ${SwitchThumb} {
-        background: ${theme.sliderDisabled};
+        background: ${theme.colorDisabled};
       }
 
       cursor: not-allowed;
@@ -76,7 +76,7 @@ const SwitchThumb = styled.label`
 	width: 40px;
 	height: 24px;
 	border-radius: 15px;
-	background: ${({ theme }) => theme.selectDefault};
+	background: ${({ theme }) => theme.defaultGrey};
 	cursor: pointer;
 	&::after {
 		content: "";
@@ -113,7 +113,7 @@ const StyledSwitch = styled.input`
 const Label = styled.p`
 	width: max-content;
 	color: ${({ theme, disabled }) =>
-		disabled ? theme.labelDisabled : theme.label};
+		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};
 	margin-left: 12px;
 	user-select: none;
 `;
