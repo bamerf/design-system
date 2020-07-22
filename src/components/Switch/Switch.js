@@ -9,7 +9,6 @@ export default function Switch({
 	size = "",
 	status = "",
 	checked,
-	disabled,
 }) {
 	const [isChecked, setIsChecked] = useState(false || checked);
 	return (
