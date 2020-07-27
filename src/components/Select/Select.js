@@ -5,27 +5,41 @@ import { typeScale } from "../../utils";
 import { DownArrow } from "../../assets/svg/icons";
 
 export default function Select({
-	min,
-	max,
 	className,
-	value,
 	size = "",
 	status = "",
-	label,
+	placeholder = "Select",
+	items = ["No options"],
 }) {
 	const [isOpen, setIsopen] = useState(false);
-	const [selectedOption, setSelectedOption] = useState(null);
+	const [selected, setSelected] = useState(null);
+
+	console.log(selected);
+
+	const handleSelection = (item) => {
+		setSelected(item);
+		setIsopen(false);
+	};
+
 	return (
-		<SelectContainer>
-			<SelectHeader onClick={() => setIsopen(!isOpen)}>
-				Select {DownArrow}
+		<SelectContainer className={className}>
+			<SelectHeader
+				onClick={() => setIsopen(!isOpen)}
+				open={isOpen}
+				selected={selected}
+			>
+				{selected || placeholder} {DownArrow}
 			</SelectHeader>
 			{isOpen && (
 				<SelectListContainer>
-					<SelectList>
-						<ListItem>Mangoes</ListItem>
-						<ListItem>Apples</ListItem>
-						<ListItem>Oranges</ListItem>
+					<SelectList open={isOpen}>
+						{items.map((item, index) => {
+							return (
+								<ListItem key={index} onClick={() => handleSelection(item)}>
+									{item}
+								</ListItem>
+							);
+						})}
 					</SelectList>
 				</SelectListContainer>
 			)}
@@ -44,9 +58,11 @@ const SelectHeader = styled("div")`
 	justify-content: space-between;
 	max-width: 190px;
 	height: 33px;
-	border: 1px solid ${({ theme }) => theme.lightGrey};
-	color: ${({ theme }) => theme.lightGrey};
-	border-radius: 2px;
+	border: 1px solid
+		${({ theme, open }) => (open ? theme.color : theme.lightGrey)};
+	color: ${({ theme, selected }) =>
+		selected ? theme.defaultGrey : theme.lightGrey};
+	border-radius: 2px 2px ${({ open }) => (open ? "0px 0px" : "2px 2px")};
 	padding-left: 12px;
 	background: white;
 	transition: all 500ms linear;
@@ -57,7 +73,7 @@ const SelectHeader = styled("div")`
 		margin-right: 8px;
 		fill: ${({ theme }) => theme.defaultGrey};
 		:hover {
-			fill: ${({ theme }) => theme.hover};
+			fill: ${({ theme, open }) => (open ? theme.color : theme.hover)};
 			transition: all 100ms linear;
 		}
 	}
@@ -79,21 +95,27 @@ const SelectHeader = styled("div")`
 const SelectListContainer = styled("div")``;
 
 const SelectList = styled("ul")`
-	padding: 0;
-	margin: 0;
-	padding-left: 1em;
 	background: #ffffff;
-	border: 2px solid #e5e5e5;
+	border: 1px solid ${({ theme }) => theme.color};
+	border-top: ${({ open }) => (open ? "none" : null)};
 	box-sizing: border-box;
-	color: #3faffa;
-	font-size: 1.3rem;
-	font-weight: 500;
-	&:first-child {
-		padding-top: 0.8em;
-	}
+	border-radius: 0px 0px 2px 2px;
 `;
 
 const ListItem = styled("li")`
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 12px;
+	color: ${({ theme }) => theme.defaultGrey};
+	border-bottom: 1px solid ${({ theme }) => theme.disabledBackground};
 	list-style: none;
-	margin-bottom: 0.8em;
+	user-select: none;
+	&:last-child {
+		border-bottom: none;
+	}
+
+	:hover {
+		cursor: pointer;
+		background-color: ${({ theme }) => theme.disabledBackground};
+	}
 `;
