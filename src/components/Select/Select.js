@@ -6,6 +6,7 @@ import { DownArrow } from "../../assets/svg/icons";
 
 export default function Select({
 	className,
+	label,
 	size = "",
 	status = "",
 	placeholder = "Select",
@@ -14,8 +15,6 @@ export default function Select({
 	const [isOpen, setIsopen] = useState(false);
 	const [selected, setSelected] = useState(null);
 
-	console.log(selected);
-
 	const handleSelection = (item) => {
 		setSelected(item);
 		setIsopen(false);
@@ -23,6 +22,7 @@ export default function Select({
 
 	return (
 		<SelectContainer className={className}>
+			{label ? <Label>{label}</Label> : null}
 			<SelectHeader
 				onClick={() => setIsopen(!isOpen)}
 				open={isOpen}
@@ -32,10 +32,15 @@ export default function Select({
 			</SelectHeader>
 			{isOpen && (
 				<SelectListContainer>
-					<SelectList open={isOpen}>
+					<SelectList open={isOpen} array={items} value={selected}>
 						{items.map((item, index) => {
 							return (
-								<ListItem key={index} onClick={() => handleSelection(item)}>
+								<ListItem
+									array={items}
+									value={selected}
+									key={index}
+									onClick={() => handleSelection(item)}
+								>
 									{item}
 								</ListItem>
 							);
@@ -43,6 +48,7 @@ export default function Select({
 					</SelectList>
 				</SelectListContainer>
 			)}
+			<Helper>Please select an option</Helper>
 		</SelectContainer>
 	);
 }
@@ -92,7 +98,10 @@ const SelectHeader = styled("div")`
 		border-color: ${({ theme }) => theme.color};
 	}
 `;
-const SelectListContainer = styled("div")``;
+const SelectListContainer = styled("div")`
+	position: absolute;
+	width: inherit;
+`;
 
 const SelectList = styled("ul")`
 	background: #ffffff;
@@ -118,4 +127,21 @@ const ListItem = styled("li")`
 		cursor: pointer;
 		background-color: ${({ theme }) => theme.disabledBackground};
 	}
+`;
+
+const Label = styled.p`
+	width: max-content;
+	color: ${({ theme, disabled }) =>
+		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};
+	margin-bottom: 8px;
+	user-select: none;
+`;
+
+const Helper = styled("h6")`
+	font-size: ${typeScale.helper};
+	width: max-content;
+	color: ${({ theme }) => theme.status.errorColorHover};
+	margin-top: 4px;
+	user-select: none;
+	visibility: hidden;
 `;

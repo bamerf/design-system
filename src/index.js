@@ -9,7 +9,11 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Select placeholder="Fruits" items={["Mangoes", "Bananas", "Oranges"]} />
+			<Select
+				label="Select an option"
+				placeholder="Fruits"
+				items={["Mangoes", "Bananas", "Oranges"]}
+			/>
 		</ThemeProvider>
 	);
 };
