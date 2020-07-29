@@ -14,6 +14,7 @@ const App = () => {
 				placeholder="Fruits"
 				items={["Mangoes", "Bananas", "Oranges"]}
 			/>
+			<h2>test</h2>
 		</ThemeProvider>
 	);
 };

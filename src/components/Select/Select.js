@@ -30,24 +30,17 @@ export default function Select({
 			>
 				{selected || placeholder} {DownArrow}
 			</SelectHeader>
-			{isOpen && (
-				<SelectListContainer>
-					<SelectList open={isOpen} array={items} value={selected}>
-						{items.map((item, index) => {
-							return (
-								<ListItem
-									array={items}
-									value={selected}
-									key={index}
-									onClick={() => handleSelection(item)}
-								>
-									{item}
-								</ListItem>
-							);
-						})}
-					</SelectList>
-				</SelectListContainer>
-			)}
+			<SelectListContainer open={isOpen}>
+				<SelectList open={isOpen}>
+					{items.map((item, index) => {
+						return (
+							<ListItem key={index} onClick={() => handleSelection(item)}>
+								{item}
+							</ListItem>
+						);
+					})}
+				</SelectList>
+			</SelectListContainer>
 			<Helper>Please select an option</Helper>
 		</SelectContainer>
 	);
@@ -100,6 +93,7 @@ const SelectHeader = styled("div")`
 `;
 const SelectListContainer = styled("div")`
 	position: absolute;
+	/* display: ${({ open }) => (open ? "block" : "none")}; */
 	width: inherit;
 `;
 
@@ -109,6 +103,9 @@ const SelectList = styled("ul")`
 	border-top: ${({ open }) => (open ? "none" : null)};
 	box-sizing: border-box;
 	border-radius: 0px 0px 2px 2px;
+	transform: ${({ open }) => (open ? "scale(1)" : "scale(1, 0)")};
+	transform-origin: top center;
+	transition: all 100ms linear;
 `;
 
 const ListItem = styled("li")`
