@@ -11,9 +11,10 @@ export default function Select({
 	status = "",
 	placeholder = "Select",
 	items = ["No options"],
+	selectedOption = null,
 }) {
 	const [isOpen, setIsopen] = useState(false);
-	const [selected, setSelected] = useState(null);
+	const [selected, setSelected] = useState(null || selectedOption);
 
 	const handleSelection = (item) => {
 		setSelected(item);
@@ -21,7 +22,7 @@ export default function Select({
 	};
 
 	return (
-		<SelectContainer className={className}>
+		<SelectContainer className={className} modifiers={[size, status]}>
 			{label ? <Label>{label}</Label> : null}
 			<SelectHeader
 				onClick={() => setIsopen(!isOpen)}
@@ -46,9 +47,57 @@ export default function Select({
 	);
 }
 
+const CHECKBOX_MODIFIERS = {
+	// large: () => `
+	// 	> div {
+	// 		width: 24px;
+	// 		height: 24px;
+	// 	}
+
+	// 	> p {
+	// 		font-size: ${typeScale.h5}
+	// 	}
+	// `,
+	// error: ({ theme, checked }) => `
+	// > div {
+	// 	border-color: ${checked ? theme.color : theme.status.errorColor}
+	// }
+
+	// > p {
+	// 	color: ${checked ? theme.defaultGrey : theme.status.errorColor}
+	// }
+
+	// &:hover {
+	// 	> div {
+	// 		border-color: ${checked ? theme.color : theme.status.errorColorHover}
+	// 	}
+	// }
+	// `,
+	disabled: ({ theme }) => `
+
+		div:first-of-type {
+			background-color: ${theme.disabledBackground};
+			border-color: ${theme.disabled};
+			color: ${theme.disabled};
+			pointer-events: none;
+			cursor: not-allowed;
+
+		  svg {
+				fill: ${theme.disabled};
+			}
+		}
+
+		> p {
+			color: ${theme.disabled};
+		}
+	`,
+};
+
 const SelectContainer = styled("div")`
 	width: 10.5em;
 	margin: 0 auto;
+
+	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
 const SelectHeader = styled("div")`
@@ -104,6 +153,7 @@ const SelectList = styled("ul")`
 	box-sizing: border-box;
 	border-radius: 0px 0px 2px 2px;
 	transform: ${({ open }) => (open ? "scale(1)" : "scale(1, 0)")};
+	opacity: ${({ open }) => (open ? 1 : 0)};
 	transform-origin: top center;
 	transition: all 100ms linear;
 `;
@@ -127,6 +177,7 @@ const ListItem = styled("li")`
 `;
 
 const Label = styled.p`
+	font-size: ${typeScale.helper};
 	width: max-content;
 	color: ${({ theme, disabled }) =>
 		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};

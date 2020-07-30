@@ -13,6 +13,7 @@ const App = () => {
 				label="Select an option"
 				placeholder="Fruits"
 				items={["Mangoes", "Bananas", "Oranges"]}
+				status="disabled"
 			/>
 			<h2>test</h2>
 		</ThemeProvider>

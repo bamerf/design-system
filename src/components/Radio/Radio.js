@@ -77,7 +77,6 @@ const CHECKBOX_MODIFIERS = {
 
 		> p {
 			color: ${theme.disabled};
-			cursor: not-allowed;
 		}
 	`,
 };
@@ -117,6 +116,7 @@ const StyledCheckbox = styled.div`
 		${({ theme, checked }) => (checked ? theme.color : theme.defaultGrey)};
 	transition: color 100ms linear, background-color 100ms linear,
 		border 100ms linear;
+	cursor: pointer;
 
 	&:hover {
 		border: 2px solid

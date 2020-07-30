@@ -66,7 +66,6 @@ const CHECKBOX_MODIFIERS = {
 
 		p {
 			color: ${theme.disabled};
-			cursor: not-allowed;
 		}
 	`,
 };
@@ -92,6 +91,7 @@ const RangeInput = styled.input.attrs(() => ({
 	background-color: ${({ theme }) => theme.lightGrey};
 	outline: none;
 	transition: all 100ms linear;
+	cursor: pointer;
 
 	&:hover {
 		background-color: ${({ theme }) => theme.defaultGrey};

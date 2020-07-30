@@ -54,7 +54,6 @@ const CHECKBOX_MODIFIERS = {
 
 		> p {
 			color: ${theme.disabled};
-			cursor: not-allowed;
 		}
 	`,
 };
