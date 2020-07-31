@@ -63,7 +63,7 @@ const CHECKBOX_MODIFIERS = {
 		li {
 			padding-top: 12px;
 			padding-bottom:12px;
-			font-size: ${typeScale.h5};
+			font-size: ${typeScale.paragraph};
 		}
 
 		> p {
@@ -187,6 +187,7 @@ const ListItem = styled("li")`
 	padding-top: 8px;
 	padding-bottom: 8px;
 	padding-left: 12px;
+	font-size: ${typeScale.helper};
 	color: ${({ theme }) => theme.defaultGrey};
 	border-bottom: 1px solid ${({ theme }) => theme.disabledBackground};
 	list-style: none;
