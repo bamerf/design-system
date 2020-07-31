@@ -22,7 +22,11 @@ export default function Select({
 	};
 
 	return (
-		<SelectContainer className={className} modifiers={[size, status]}>
+		<SelectContainer
+			className={className}
+			modifiers={[size, status]}
+			selected={selected}
+		>
 			{label ? <Label>{label}</Label> : null}
 			<SelectHeader
 				onClick={() => setIsopen(!isOpen)}
@@ -48,31 +52,54 @@ export default function Select({
 }
 
 const CHECKBOX_MODIFIERS = {
-	// large: () => `
-	// 	> div {
-	// 		width: 24px;
-	// 		height: 24px;
-	// 	}
+	large: () => `
+	width: 190px;
 
-	// 	> p {
-	// 		font-size: ${typeScale.h5}
-	// 	}
-	// `,
-	// error: ({ theme, checked }) => `
-	// > div {
-	// 	border-color: ${checked ? theme.color : theme.status.errorColor}
-	// }
+	div:first-of-type {
+			height: 44px;
+			font-size: ${typeScale.h5}
+		}
 
-	// > p {
-	// 	color: ${checked ? theme.defaultGrey : theme.status.errorColor}
-	// }
+		li {
+			padding-top: 12px;
+			padding-bottom:12px;
+			font-size: ${typeScale.h5};
+		}
 
-	// &:hover {
-	// 	> div {
-	// 		border-color: ${checked ? theme.color : theme.status.errorColorHover}
-	// 	}
-	// }
-	// `,
+		> p {
+			font-size: ${typeScale.h5}
+		}
+
+		> h6 {
+			font-size: ${typeScale.paragraph}
+		}
+	`,
+	small: () => `
+	width: 120px;
+
+	div:first-of-type {
+			height: 24px;
+			font-size: ${typeScale.helper}
+		}
+
+		li {
+			padding-top: 8px;
+			padding-bottom:8px;
+			font-size: ${typeScale.helper}
+		}
+
+		> p {
+			font-size: ${typeScale.helper}
+		}
+	`,
+	error: ({ theme, selected }) => `
+		div:first-of-type:not(:hover) {
+			border-color: ${selected ? theme.lightGrey : theme.status.errorColorHover}
+		}
+		> h6 {
+			visibility: ${selected ? "hidden" : "visible"};
+		}
+	`,
 	disabled: ({ theme }) => `
 
 		div:first-of-type {
@@ -94,7 +121,7 @@ const CHECKBOX_MODIFIERS = {
 };
 
 const SelectContainer = styled("div")`
-	width: 10.5em;
+	width: 144px;
 	margin: 0 auto;
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
@@ -104,7 +131,6 @@ const SelectHeader = styled("div")`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	max-width: 190px;
 	height: 33px;
 	border: 1px solid
 		${({ theme, open }) => (open ? theme.color : theme.lightGrey)};
@@ -142,7 +168,6 @@ const SelectHeader = styled("div")`
 `;
 const SelectListContainer = styled("div")`
 	position: absolute;
-	/* display: ${({ open }) => (open ? "block" : "none")}; */
 	width: inherit;
 `;
 

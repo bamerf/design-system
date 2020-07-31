@@ -11,9 +11,10 @@ const App = () => {
 			<GlobalStyle />
 			<Select
 				label="Select an option"
-				placeholder="Fruits"
-				items={["Mangoes", "Bananas", "Oranges"]}
-				status="disabled"
+				placeholder="Effects"
+				items={["Reverb", "Delay", "Saturation"]}
+				// status="error"
+				// size="small"
 			/>
 			<h2>test</h2>
 		</ThemeProvider>
