@@ -122,7 +122,6 @@ const CHECKBOX_MODIFIERS = {
 
 const SelectContainer = styled("div")`
 	width: 144px;
-	margin: 0 auto;
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
@@ -202,7 +201,7 @@ const ListItem = styled("li")`
 	}
 `;
 
-const Label = styled.p`
+const Label = styled("p")`
 	font-size: ${typeScale.helper};
 	width: max-content;
 	color: ${({ theme, disabled }) =>
