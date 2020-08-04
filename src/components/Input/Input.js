@@ -97,7 +97,6 @@ const CHECKBOX_MODIFIERS = {
 
 const InputContainer = styled("div")`
 	width: 160px;
-	margin: 0 auto;
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
