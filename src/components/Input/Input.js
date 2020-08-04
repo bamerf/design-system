@@ -16,22 +16,90 @@ export default function Input({
 	const [inputText, setInputText] = useState(value || "");
 
 	return (
-		<InputContainer className={className} modifiers={[size, status]}>
+		<InputContainer
+			className={className}
+			modifiers={[size, status]}
+			value={inputText}
+		>
 			{label ? <Label>{label}</Label> : null}
 			<StyledInput
 				type={type}
 				value={inputText}
 				placeholder={placeholder}
 				onChange={(e) => setInputText(e.target.value)}
+				disabled={status === "disabled" ? true : false}
 			/>
 			<Helper>{helperText}</Helper>
 		</InputContainer>
 	);
 }
 
+const CHECKBOX_MODIFIERS = {
+	large: () => `
+	width: 190px;
+
+	input {
+			height: 44px;
+			font-size: ${typeScale.h5};
+		}
+
+		> p {
+      font-size: ${typeScale.h5};
+		}
+
+		> h6 {
+			font-size: ${typeScale.paragraph};
+		}
+	`,
+	small: () => `
+	width: 120px;
+
+	input {
+			height: 24px;
+			font-size: ${typeScale.helper};
+		}
+
+		> p {
+      font-size: ${typeScale.helper};
+      margin-bottom: 4px;
+    }
+    
+    > h6 {
+      font-size: ${typeScale.copyright};
+    }
+	`,
+	error: ({ theme, value }) => `
+		input:not(:hover):not(:focus) {
+			border-color: ${value ? theme.lightGrey : theme.status.errorColorHover}
+		}
+		> h6 {
+			visibility: ${value ? "hidden" : "visible"};
+		}
+	`,
+	disabled: ({ theme }) => `
+  
+    cursor: not-allowed;
+
+		input {
+			background-color: ${theme.disabledBackground};
+			border-color: ${theme.disabled};
+			color: ${theme.disabled};
+			pointer-events: none;
+			cursor: not-allowed;
+
+		}
+
+		> p {
+			color: ${theme.disabled};
+		}
+	`,
+};
+
 const InputContainer = styled("div")`
 	width: 160px;
 	margin: 0 auto;
+
+	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
 const StyledInput = styled("input")`
@@ -55,14 +123,10 @@ const StyledInput = styled("input")`
 	&::placeholder {
 		color: ${({ theme }) => theme.placeholder};
 	}
-
-	&:before {
-		content: "test";
-	}
 `;
 
 const Label = styled("p")`
-	font-size: ${typeScale.helper};
+	font-size: ${typeScale.paragraph};
 	width: max-content;
 	color: ${({ theme, disabled }) =>
 		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};

@@ -102,6 +102,8 @@ const CHECKBOX_MODIFIERS = {
 	`,
 	disabled: ({ theme }) => `
 
+		cursor: not-allowed;
+
 		div:first-of-type {
 			background-color: ${theme.disabledBackground};
 			border-color: ${theme.disabled};
@@ -202,7 +204,7 @@ const ListItem = styled("li")`
 `;
 
 const Label = styled("p")`
-	font-size: ${typeScale.helper};
+	font-size: ${typeScale.paragraph};
 	width: max-content;
 	color: ${({ theme, disabled }) =>
 		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};
