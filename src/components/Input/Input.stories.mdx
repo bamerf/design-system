@@ -13,7 +13,7 @@ Input fields are used for the user to type their value as text, number, password
 
 <Preview withToolbar>
 	<Story name="Default">
-		<Input />
+		<Input type="text" />
 	</Story>
 </Preview>
 
@@ -33,6 +33,31 @@ Labelled Input
 	</Story>
 	<Story name="Small">
 		<Input label="Small Input" size="small" />
+	</Story>
+</Preview>
+
+### Extended
+
+<Preview withToolbar>
+	<Story name="Extended">
+		<Input label="Extended Input" width="100%" />
+	</Story>
+</Preview>
+
+### Types
+
+<Preview withToolbar>
+	<Story name="Text">
+		<Input label="Text Input" />
+	</Story>
+	<Story name="Password">
+		<Input label="Password Input" type="password" />
+	</Story>
+	<Story name="Number">
+		<Input label="Number Input" type="number" />
+	</Story>
+	<Story name="Date">
+		<Input label="Date Input" type="date" />
 	</Story>
 </Preview>
 
