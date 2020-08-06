@@ -10,6 +10,7 @@ export default function Input({
 	type = "text",
 	size = "",
 	status = "",
+	width,
 	placeholder = "Placeholder",
 	helperText = "This field is required *",
 }) {
@@ -20,6 +21,7 @@ export default function Input({
 			className={className}
 			modifiers={[size, status]}
 			value={inputText}
+			width={width}
 		>
 			{label ? <Label>{label}</Label> : null}
 			<StyledInput
@@ -35,15 +37,15 @@ export default function Input({
 }
 
 const CHECKBOX_MODIFIERS = {
-	large: () => `
-	width: 190px;
+	large: ({ width }) => `
+	width: ${width || "190px"};
 
 	input {
 			height: 44px;
 			font-size: ${typeScale.h5};
 		}
 
-		> p {
+		> label {
       font-size: ${typeScale.h5};
 		}
 
@@ -51,15 +53,15 @@ const CHECKBOX_MODIFIERS = {
 			font-size: ${typeScale.paragraph};
 		}
 	`,
-	small: () => `
-	width: 120px;
+	small: ({ width }) => `
+	width: ${width || "120px"};
 
 	input {
 			height: 24px;
 			font-size: ${typeScale.helper};
 		}
 
-		> p {
+		> label {
       font-size: ${typeScale.helper};
       margin-bottom: 4px;
     }
@@ -89,14 +91,16 @@ const CHECKBOX_MODIFIERS = {
 
 		}
 
-		> p {
+		> label {
 			color: ${theme.disabled};
 		}
 	`,
 };
 
 const InputContainer = styled("div")`
-	width: 160px;
+	display: flex;
+	flex-direction: column;
+	width: ${({ width }) => width || "160px"};
 
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
@@ -124,7 +128,8 @@ const StyledInput = styled("input")`
 	}
 `;
 
-const Label = styled("p")`
+const Label = styled("label")`
+	display: inline-block;
 	font-size: ${typeScale.paragraph};
 	width: max-content;
 	color: ${({ theme, disabled }) =>

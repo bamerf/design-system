@@ -40,7 +40,7 @@ const CHECKBOX_MODIFIERS = {
 			height: 24px;
 		}
 
-		> p {
+		> label {
 			font-size: ${typeScale.h5}
 		}
   `,
@@ -49,7 +49,7 @@ const CHECKBOX_MODIFIERS = {
 		border-color: ${checked ? theme.color : theme.status.errorColor}
 	}
 
-	> p {
+	> label {
 		color: ${checked ? theme.defaultGrey : theme.status.errorColor}
 	}
 
@@ -70,7 +70,7 @@ const CHECKBOX_MODIFIERS = {
 			pointer-events:none;
 		}
 
-		> p {
+		> label {
 			color: ${theme.disabled};
 		}
 	`,
@@ -146,7 +146,8 @@ const StyledCheckbox = styled.div`
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
-const Label = styled.p`
+const Label = styled.label`
+	display: inline-block;
 	width: max-content;
 	color: ${({ theme, disabled }) =>
 		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};
