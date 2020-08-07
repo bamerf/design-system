@@ -66,7 +66,7 @@ const CHECKBOX_MODIFIERS = {
 			font-size: ${typeScale.paragraph};
 		}
 
-		> p {
+		> label {
 			font-size: ${typeScale.h5}
 		}
 
@@ -88,7 +88,7 @@ const CHECKBOX_MODIFIERS = {
 			font-size: ${typeScale.helper}
 		}
 
-		> p {
+		> label {
 			font-size: ${typeScale.helper}
 		}
 	`,
@@ -116,7 +116,7 @@ const CHECKBOX_MODIFIERS = {
 			}
 		}
 
-		> p {
+		> label {
 			color: ${theme.disabled};
 		}
 	`,
@@ -203,7 +203,8 @@ const ListItem = styled("li")`
 	}
 `;
 
-const Label = styled("p")`
+const Label = styled("label")`
+	display: inline-block;
 	font-size: ${typeScale.paragraph};
 	width: max-content;
 	color: ${({ theme, disabled }) =>

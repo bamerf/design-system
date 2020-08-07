@@ -26,7 +26,7 @@ export default function Switch({
 
 const CHECKBOX_MODIFIERS = {
 	large: () => `
-		> p {
+		> label {
 			font-size: ${typeScale.h5}
 		}
   `,
@@ -34,7 +34,7 @@ const CHECKBOX_MODIFIERS = {
   
     cursor: not-allowed;
   
-		> label {
+		> div {
       cursor: not-allowed;
       pointer-events:none;
       background: ${theme.disabled};
@@ -52,7 +52,7 @@ const CHECKBOX_MODIFIERS = {
       pointer-events:none;
     }
 
-		> p {
+		> label {
 			color: ${theme.disabled};
 		}
 	`,
@@ -67,7 +67,7 @@ const Container = styled.div`
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
-const SwitchThumb = styled.label`
+const SwitchThumb = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -108,7 +108,8 @@ const StyledSwitch = styled.input`
 	}
 `;
 
-const Label = styled.p`
+const Label = styled.label`
+	display: inline-block;
 	width: max-content;
 	color: ${({ theme, disabled }) =>
 		disabled ? theme.defaultGreyDisabled : theme.defaultGrey};

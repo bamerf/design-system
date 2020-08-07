@@ -42,7 +42,7 @@ export default function Slider({
 
 const CHECKBOX_MODIFIERS = {
 	large: () => `
-		p {
+		label {
 			font-size: ${typeScale.h5};
 		}
 
@@ -64,7 +64,7 @@ const CHECKBOX_MODIFIERS = {
 			}
 		}
 
-		p {
+		label {
 			color: ${theme.disabled};
 		}
 	`,
@@ -184,7 +184,8 @@ const Value = styled.p`
 	user-select: none;
 `;
 
-const Label = styled.p`
+const Label = styled.label`
+	display: inline-block;
 	color: ${({ theme }) => theme.defaultGrey};
 	margin-left: 5px;
 	margin-bottom: 8px;
