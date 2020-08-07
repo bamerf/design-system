@@ -21,7 +21,7 @@ export default function Radio({
 			<HiddenCheckbox checked={isChecked} {...props} />
 			<StyledCheckbox
 				checked={isChecked}
-				onClick={() => setIsChecked(!isChecked)}
+				onClick={() => setIsChecked(true)}
 			></StyledCheckbox>
 			{label ? <Label>{label}</Label> : null}
 		</Container>
