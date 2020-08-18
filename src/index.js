@@ -9,7 +9,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Input label="Labelled" size="small" />
+			<Input label="Labelled" />
 		</ThemeProvider>
 	);
 };
