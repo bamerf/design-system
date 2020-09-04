@@ -4,10 +4,10 @@ import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale } from "../../utils";
 
 export default function Slider({
-	min,
-	max,
+	min = 0,
+	max = 100,
 	className,
-	value,
+	value = 0,
 	size = "",
 	status = "",
 	label,
@@ -59,6 +59,10 @@ const CHECKBOX_MODIFIERS = {
 		input {
 			background-color: ${theme.disabled};
 			&::-webkit-slider-thumb {
+				border: 3px solid ${value === min ? theme.disabled : theme.colorDisabled};
+				background-color: ${theme.disabledBackground};
+			}
+			&::-moz-range-thumb {
 				border: 3px solid ${value === min ? theme.disabled : theme.colorDisabled};
 				background-color: ${theme.disabledBackground};
 			}
@@ -142,25 +146,30 @@ const RangeInput = styled.input.attrs(() => ({
 	}
 
 	&::-moz-range-thumb {
-		width: 18px;
-		height: 18px;
+		width: 14px;
+		height: 14px;
 		position: relative;
 		z-index: 1;
 		border-radius: 50%;
-		border: 3px solid black;
+		border: 3px solid
+			${({ theme, min, value }) =>
+				value === min ? theme.lightGrey : theme.color};
 		background-color: white;
 		cursor: pointer;
-		outline: 5px solid red;
 		-webkit-transition: 100ms;
 		transition: all 100ms linear;
 
 		&:hover {
-			border-color: ${({ theme }) => theme.hover};
+			border-color: ${({ theme, min, value }) =>
+				value === min ? theme.defaultGrey : theme.hover};
 		}
 
 		&:active {
-			background-color: ${({ theme }) => theme.color};
-			border: 3px solid ${({ theme }) => theme.color};
+			background-color: ${({ theme, min, value }) =>
+				value === min ? theme.defaultGrey : theme.color};
+			border: 3px solid
+				${({ theme, min, value }) =>
+					value === min ? theme.defaultGrey : theme.color};
 		}
 	}
 `;
