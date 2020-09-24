@@ -9,7 +9,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Slider label="Labelled" />
+			<Slider label="Labelled" status="disabled"/>
 		</ThemeProvider>
 	);
 };

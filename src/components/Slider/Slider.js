@@ -27,6 +27,7 @@ export default function Slider({
 					max={max}
 					value={Number(valueNum)}
 					onChange={(e) => setValueNum(e.target.value)}
+					tabIndex={status === "disabled" ? "-1" : "0"}
 				/>
 				{/* <RangeFill
 					min={min}
@@ -112,6 +113,20 @@ const RangeInput = styled.input.attrs(() => ({
 		&::-moz-range-thumb {
 			background-color: ${({ theme }) => theme.color};
 			border: 0px solid ${({ theme }) => theme.color};
+		}
+	}
+
+	&:focus {
+		background-color: ${({ theme }) => theme.defaultGrey};
+
+		&::-webkit-slider-thumb {
+			background-color: ${({ theme }) => theme.color};
+			border: 3px solid ${({ theme }) => theme.color};
+		}
+
+		&::-moz-range-thumb {
+			background-color: ${({ theme }) => theme.color};
+			border: 3px solid ${({ theme }) => theme.color};
 		}
 	}
 
