@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale } from "../../utils";
 import { DownArrow } from "../../assets/svg/icons";
+
+// This component needs keyboard navigation and selection
 
 export default function Select({
 	className,
@@ -14,32 +16,70 @@ export default function Select({
 	selectedOption = null,
 }) {
 	const [isOpen, setIsopen] = useState(false);
-	const [selected, setSelected] = useState(null || selectedOption);
+	const [selected, setSelected] = useState(selectedOption);
+	const activatorRef = useRef(null)
+	const dropdownListRef = useRef(null)
+
+	const handleClick = () => {
+		setIsopen(!isOpen)
+	}
+
+	const handleKey = (event, item) => {
+		console.log("open: ",isOpen)
+		console.log("key: ",event.key)
+		console.log("selected:",selected)
+		console.log("item:",item)
+		if(event.key === "Enter" && isOpen) {
+			setSelected(event.target.value)
+			// setIsopen(false)
+			console.log(selected)
+		} 
+		if(event.key === "Escape" && isOpen) setIsopen(false)
+	}
 
 	const handleSelection = (item) => {
 		setSelected(item);
 		setIsopen(false);
 	};
 
+	const clickOutsideHandler = (event) => {
+		if(dropdownListRef.current.contains(event.target || activatorRef.current.contains(event.target))) return
+		setIsopen(false)
+	}
+
+	useEffect(() => {
+		if(isOpen) {
+			// dropdownListRef.current.querySelector("li").focus()
+			document.addEventListener('mousedown', clickOutsideHandler)
+		} else {
+			document.removeEventListener('mousedown', clickOutsideHandler)
+		}
+	}, [isOpen])
+
 	return (
 		<SelectContainer
 			className={className}
 			modifiers={[size, status]}
 			selected={selected}
+			onKeyUp={handleKey}
 		>
 			{label ? <Label>{label}</Label> : null}
 			<SelectHeader
-				onClick={() => setIsopen(!isOpen)}
+				onClick={handleClick}
 				open={isOpen}
 				selected={selected}
+				aria-haspopup="true"
+				arial-controls="dropdown1"
+				tabIndex="0"
+				ref={activatorRef}
 			>
 				{selected || placeholder} {DownArrow}
 			</SelectHeader>
 			<SelectListContainer open={isOpen}>
-				<SelectList open={isOpen}>
+				<SelectList id="dropdown1" role="list" open={isOpen}  ref={dropdownListRef} >
 					{items.map((item, index) => {
 						return (
-							<ListItem key={index} onClick={() => handleSelection(item)}>
+							<ListItem tabIndex="0" key={index} onClick={() => handleSelection(item)} onKeyUp={(event) => handleKey(event, item)}>
 								{item}
 							</ListItem>
 						);
@@ -128,11 +168,12 @@ const SelectContainer = styled("div")`
 	${applyStyleModifiers(CHECKBOX_MODIFIERS)}
 `;
 
-const SelectHeader = styled("div")`
+const SelectHeader = styled("button")`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	height: 33px;
+	width: 100%;
 	border: 1px solid
 		${({ theme, open }) => (open ? theme.color : theme.lightGrey)};
 	color: ${({ theme, selected }) =>
@@ -147,6 +188,7 @@ const SelectHeader = styled("div")`
 	> svg {
 		margin-right: 8px;
 		fill: ${({ theme }) => theme.defaultGrey};
+
 		:hover {
 			fill: ${({ theme, open }) => (open ? theme.color : theme.hover)};
 			transition: all 100ms linear;
@@ -159,8 +201,13 @@ const SelectHeader = styled("div")`
 	}
 
 	:focus {
+		outline: 0;
 		border-color: ${({ theme }) => theme.color};
 		transition: all 100ms linear;
+
+		svg {
+			fill: ${({ theme, open }) => (open ? theme.color : theme.hover)};
+		}
 	}
 
 	:active {
@@ -199,6 +246,11 @@ const ListItem = styled("li")`
 
 	:hover {
 		cursor: pointer;
+		background-color: ${({ theme }) => theme.disabledBackground};
+	}
+
+	:focus {
+		outline: 0;
 		background-color: ${({ theme }) => theme.disabledBackground};
 	}
 `;

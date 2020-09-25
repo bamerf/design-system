@@ -13,16 +13,22 @@ export default function Checkbox({
 	...props
 }) {
 	const [isChecked, setIsChecked] = useState(false || checked);
+
+	const handleKey = (event) => {
+		if(event.key === "Enter") setIsChecked(!isChecked)
+	}
 	return (
 		<CheckboxContainer
 			className={className}
 			modifiers={[size, status]}
 			checked={isChecked}
 		>
-			<HiddenCheckbox checked={isChecked} {...props} />
+			<HiddenCheckbox tabIndex="-1" checked={isChecked} {...props} />
 			<StyledCheckbox
 				checked={isChecked}
+				tabIndex={status === "disabled" ? "-1" : "0"}
 				onClick={() => setIsChecked(!isChecked)}
+				onKeyUp={(event) => handleKey(event)}
 			>
 				<Icon viewBox="0 0 24 24">
 					<polyline points="22 4 8 20 1 14" />
@@ -122,8 +128,10 @@ const StyledCheckbox = styled.div`
 	}
 
 	&:focus {
-		outline: 2px solid ${({ theme }) => theme.focusOutline};
-		outline-offset: 1px;
+		/* outline: 2px solid ${({ theme }) => theme.focusOutline};
+		outline-offset: 1px; */
+		outline: none;
+		border: 2px solid ${({theme, checked}) => checked ? theme.color : theme.hover}
 	}
 
 	&:active {

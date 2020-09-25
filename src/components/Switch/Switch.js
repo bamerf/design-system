@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { applyStyleModifiers } from "styled-components-modifiers";
 import { typeScale } from "../../utils";
 
+// This component has a bug where if switched using keyboard enter, mouse click stops working and vice versa
+
 export default function Switch({
 	className,
 	label,
@@ -10,14 +12,22 @@ export default function Switch({
 	status = "",
 	checked,
 }) {
+
 	const [isChecked, setIsChecked] = useState(false || checked);
+
+	const handleKey = (event) => {
+		if(event.key === "Enter") setIsChecked(!isChecked)
+	}
+
 	return (
 		<Container className={className} modifiers={[size, status]}>
-			<StyledSwitch id="checkbox" type="checkbox" checked={isChecked} />
+			<StyledSwitch tabIndex="-1" id="checkbox" type="checkbox" checked={isChecked} />
 			<SwitchThumb
+				tabIndex={status === "disabled" ? "-1" : "0"}
 				htmlFor="switch"
 				checked={isChecked}
 				onClick={() => setIsChecked(!isChecked)}
+				onKeyUp={(event) => handleKey(event)}
 			/>
 			{label ? <Label>{label}</Label> : null}
 		</Container>

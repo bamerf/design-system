@@ -12,16 +12,23 @@ export default function Radio({
 	...props
 }) {
 	const [isChecked, setIsChecked] = useState(false || checked);
+
+	const handleKey = (event) => {
+		if(event.key === "Enter") setIsChecked(true) 
+	}
+
 	return (
 		<Container
 			className={className}
 			modifiers={[size, status]}
 			checked={isChecked}
 		>
-			<HiddenCheckbox checked={isChecked} {...props} />
+			<HiddenCheckbox tabIndex="-1" checked={isChecked} {...props} />
 			<StyledCheckbox
+				tabIndex={status === "disabled" ? "-1" : "0"}
 				checked={isChecked}
 				onClick={() => setIsChecked(true)}
+				onKeyUp={(event) => handleKey(event)}
 			></StyledCheckbox>
 			{label ? <Label>{label}</Label> : null}
 		</Container>
@@ -129,8 +136,10 @@ const StyledCheckbox = styled.div`
 	}
 
 	&:focus {
-		outline: 2px solid ${({ theme }) => theme.focusOutline};
-		outline-offset: 1px;
+		/* outline: 2px solid ${({ theme }) => theme.focusOutline};
+		outline-offset: 1px; */
+		outline: none;
+		border: 2px solid ${({theme, checked}) => checked ? theme.color : theme.hover}
 	}
 
 	&:disabled {
