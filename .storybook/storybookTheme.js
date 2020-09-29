@@ -9,7 +9,7 @@ export default create({
 
 	// UI
 	// appBg: neutral[200],
-	// appContentBg: "silver",
+	appContentBg: "white",
 	// appBorderColor: "grey",
 	// appBorderRadius: 4,
 

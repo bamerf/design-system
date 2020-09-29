@@ -214,6 +214,7 @@ const SelectHeader = styled("button")`
 		border-color: ${({ theme }) => theme.color};
 	}
 `;
+
 const SelectListContainer = styled("div")`
 	position: absolute;
 	width: inherit;
