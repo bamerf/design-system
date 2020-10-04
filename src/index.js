@@ -9,7 +9,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
 			<GlobalStyle />
-			<Select label="Labelled"/>
+			<Select label="Labelled" status="disabled" items={["option 1", "option 2", "option 3"]}/>
 		</ThemeProvider>
 	);
 };

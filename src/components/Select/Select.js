@@ -25,10 +25,6 @@ export default function Select({
 	}
 
 	const handleKey = (event, item) => {
-		console.log("open: ",isOpen)
-		console.log("key: ",event.key)
-		console.log("selected:",selected)
-		console.log("item:",item)
 		if(event.key === "Enter" && isOpen) {
 			setSelected(event.target.value)
 			// setIsopen(false)
@@ -77,13 +73,15 @@ export default function Select({
 			</SelectHeader>
 			<SelectListContainer open={isOpen}>
 				<SelectList id="dropdown1" role="list" open={isOpen}  ref={dropdownListRef} >
-					{items.map((item, index) => {
+					{status !== "disabled" ?
+					items.map((item, index) => {
 						return (
 							<ListItem tabIndex="0" key={index} onClick={() => handleSelection(item)} onKeyUp={(event) => handleKey(event, item)}>
 								{item}
 							</ListItem>
 						);
-					})}
+					})
+					: null}
 				</SelectList>
 			</SelectListContainer>
 			<Helper>Please select an option</Helper>
@@ -144,7 +142,7 @@ const CHECKBOX_MODIFIERS = {
 
 		cursor: not-allowed;
 
-		div:first-of-type {
+		button:first-of-type {
 			background-color: ${theme.disabledBackground};
 			border-color: ${theme.disabled};
 			color: ${theme.disabled};
