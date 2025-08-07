@@ -121,4 +121,4 @@ The design system uses styled-components with a comprehensive theme system. Them
 
 ## License
 
-Copyright (c) 2024 LeadChat. All rights reserved.
+Copyright (c) 2022 LeadChat. All rights reserved.
