@@ -1,41 +1,124 @@
-# Design System
+# LeadChat Design System
 
-This is a `UI Library` built from a `design system` template created for a company.
+A modern design system built with Next.js and Storybook, featuring reusable React components with styled-components.
 
----
+## Features
 
-## `Technologies & features`
+- **Next.js 14**: Modern React framework with server-side rendering
+- **Storybook**: Interactive component documentation and testing
+- **Styled Components**: CSS-in-JS styling with theme support
+- **Accessibility**: Built with accessibility best practices
+- **TypeScript Ready**: Components are ready for TypeScript migration
 
-* react
-* style-components
-* storybooks
-* accessibility
-  
----
+## Getting Started
 
-## `Design System Template`
+### Prerequisites
 
-The component library has been design with a wholistic approach in mind, focusing on color unity, visual comfort and accessibility in mind.
+- Node.js >= 18.0.0
+- npm or yarn
 
-Visit the design system template 👉 [here](https://www.figma.com/file/xl28rT9nlkuB1YHjSQQv8a/Bam-Erfanian-Design-System-Template)
+### Installation
 
----
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## `Component Library`
+### Development
 
-Using the power of react and styled-components, the component library had been built with modularity in mind allowing for easy modification, state, prop and class management and fully customizable theming options.
+#### Run the Next.js App
 
-Visit the component library 👉 [here](https://design-system-zeta.vercel.app/)
+```bash
+npm run dev
+```
 
----
+The app will be available at `http://localhost:3000`
 
-## `Accessibility`
+#### Run Storybook
 
-Both the design system and the component library have been built with accessibility in mind. Below are some of the accessibility features implemented:
+```bash
+npm run storybook
+```
 
-* Color contrast
-* Semantic HTML
-* ARIA labels and relationships
-* Keyboard navigable (a couple of component are still missing this)
-* Focus Management
-* Screen reader announcements
+Storybook will be available at `http://localhost:9009`
+
+### Building for Production
+
+#### Build the Next.js App
+
+```bash
+npm run build
+npm start
+```
+
+#### Build Storybook
+
+```bash
+npm run build-storybook
+```
+
+## Project Structure
+
+```
+design-system/
+├── pages/                 # Next.js pages
+│   ├── _app.js           # App wrapper
+│   ├── _document.js      # Document wrapper
+│   └── index.js          # Home page
+├── src/
+│   ├── components/       # React components
+│   │   ├── Buttons/
+│   │   ├── Checkbox/
+│   │   ├── Input/
+│   │   ├── Radio/
+│   │   ├── Select/
+│   │   ├── Slider/
+│   │   └── Switch/
+│   ├── assets/           # Images and SVG icons
+│   └── utils/            # Utilities and themes
+├── .storybook/           # Storybook configuration
+├── public/               # Static assets
+└── next.config.js        # Next.js configuration
+```
+
+## Components
+
+The design system includes the following components:
+
+- **Buttons**: Various button styles and states
+- **Checkbox**: Custom checkbox component
+- **Input**: Text input fields
+- **Radio**: Radio button groups
+- **Select**: Dropdown select component
+- **Slider**: Range slider component
+- **Switch**: Toggle switch component
+
+Each component includes:
+
+- Interactive Storybook stories
+- Accessibility features
+- Multiple variants and states
+- Responsive design
+- Theme support
+
+## Theming
+
+The design system uses styled-components with a comprehensive theme system. Themes include:
+
+- Color palettes
+- Typography scales
+- Spacing systems
+- Component-specific tokens
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Add or update Storybook stories
+4. Test accessibility
+5. Submit a pull request
+
+## License
+
+Copyright (c) 2024 LeadChat. All rights reserved.
